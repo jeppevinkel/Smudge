@@ -11,6 +11,12 @@
           "Microsoft.CodeAnalysis.Common": "4.11.0"
         }
       },
+      "GitHubActionsTestLogger": {
+        "type": "Direct",
+        "requested": "[3.0.4, )",
+        "resolved": "3.0.4",
+        "contentHash": "24fDBf5g5KuyeK9OIu4z0zIkOu6DE3JCmRP+NyNGL3PVmd2Yls8sR8dC1/j34t2tZQS/0arQs7GZTmwWYk4qbQ=="
+      },
       "Microsoft.CodeAnalysis.CSharp": {
         "type": "Direct",
         "requested": "[4.12.0, )",
