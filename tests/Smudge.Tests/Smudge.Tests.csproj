@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Smudge\Smudge.csproj" />
+        <ProjectReference Include="..\..\src\Smudge.Attributes\Smudge.Attributes.csproj" />
+        <!-- consume the generator exactly like an end user: as an analyzer,
+             not an assembly reference -->
+        <ProjectReference Include="..\..\src\Smudge.SourceGenerator\Smudge.SourceGenerator.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+</Project>

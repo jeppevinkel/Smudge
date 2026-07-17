@@ -10,4 +10,5 @@
   <Project Path="src/Smudge.SourceGenerator/Smudge.SourceGenerator.csproj" />
   <Project Path="src/Smudge/Smudge.csproj" />
   <Project Path="tests/Smudge.SourceGenerator.Tests/Smudge.SourceGenerator.Tests.csproj" />
+  <Project Path="tests/Smudge.Tests/Smudge.Tests.csproj" />
 </Solution>
