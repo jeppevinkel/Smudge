@@ -6,6 +6,7 @@ using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+// ReSharper disable MergeIntoPattern
 
 namespace Smudge.SourceGenerator;
 
@@ -34,7 +35,7 @@ internal static class Transformer
         // --- DirtyMode: validate before trusting; (DirtyMode)5 is legal C# ---
         var mode = DirtyMode.Aggregated;
         var ctorArgs = ctx.Attributes[0].ConstructorArguments;
-        if (ctorArgs is [{ Value: int rawMode }])
+        if (ctorArgs.Length == 1 && ctorArgs[0].Value is int rawMode)
         {
             if (rawMode is (int)DirtyMode.Aggregated or (int)DirtyMode.PerProperty)
             {
