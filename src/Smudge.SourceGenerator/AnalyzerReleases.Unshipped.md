@@ -2,10 +2,10 @@
 
 Rule ID | Category | Severity | Notes  
 --------|----------|----------|--------
-SMDG001 | Usage    | Error    | SMDG001
-SMDG002 | Usage    | Error    | SMDG002
-SMDG003 | Usage    | Error    | SMDG003
-SMDG004 | Usage    | Error    | SMDG004
-SMDG005 | Usage    | Error    | SMDG005
-SMDG006 | Usage    | Error    | SMDG005
-SMDG007 | Usage    | Error    | SMDG005
+SMDG001 | Usage    | Error    | Wrong argument count in [SmudgeDefault]
+SMDG002 | Usage    | Error    | Type mismatch in [SmudgeDefault]
+SMDG003 | Usage    | Error    | [Smudgeable] class must be partial
+SMDG004 | Usage    | Error    | Unsupported [Smudgeable] class
+SMDG005 | Usage    | Error    | Partial property must declare get and set
+SMDG006 | Usage    | Error    | Invalid DirtyMode value
+SMDG007 | Usage    | Error    | Too many tracked properties
