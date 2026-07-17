@@ -188,10 +188,13 @@ internal static class Transformer
 
         return constant.Value switch
         {
+            // FormatLiteral handles escaping ("a\"b", newlines, backslashes...)
             string s => SymbolDisplay.FormatLiteral(s, quote: true),
             char c   => SymbolDisplay.FormatLiteral(c, quote: true),
             bool b   => b ? "true" : "false",
 
+            // Invariant culture (no "1,5" on de-DE build machines) + suffixes
+            // so float/double literals actually compile against the field type.
             float f when float.IsNaN(f)                => "float.NaN",
             float f when float.IsPositiveInfinity(f)   => "float.PositiveInfinity",
             float f when float.IsNegativeInfinity(f)   => "float.NegativeInfinity",
