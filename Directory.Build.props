@@ -10,7 +10,7 @@
     <IsPackable>false</IsPackable>
 
     <Authors>jeppevinkel</Authors>
-    <Copyright>Copyright © jeppevinkel $([System.DateTime]::Now.Year)</Copyright>
+    <Copyright>Copyright © jeppevinkel</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jeppevinkel/Smudge</PackageProjectUrl>
