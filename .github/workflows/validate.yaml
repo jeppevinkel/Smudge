@@ -1,0 +1,58 @@
+name: Validate
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}   # superseded pushes to the same PR get canceled
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+          
+      - name: Restore
+        run: dotnet restore --locked-mode
+        
+      - name: Build
+        run: dotnet build --no-restore -c Release -p:Version=0.0.0-ci.${{ github.run_number }}
+        
+      - name: Test
+        run: dotnet test --no-build -c Release --report-github
+        
+      - name: Pack (validation only)
+        run: |
+          dotnet pack src/Smudge/Smudge.csproj \
+            --no-build -c Release \
+            -p:Version=0.0.0-ci.${{ github.run_number }} \
+            -o ./artifacts
+          
+      - name: Package smoke test
+        run: |
+          dotnet restore tests/PackageSmokeTest -p:SmudgeVersion=0.0.0-ci.${{ github.run_number }} \
+            --source ./artifacts --source https://api.nuget.org/v3/index.json
+          dotnet build tests/PackageSmokeTest --no-restore -c Release
+          
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: packages
+          path: ./artifacts/*
+          retention-days: 7
