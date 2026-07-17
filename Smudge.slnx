@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/SolutionFolder/">
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Project Path="src/Smudge.Attributes/Smudge.Attributes.csproj" />
+  <Project Path="src/Smudge.SourceGenerator/Smudge.SourceGenerator.csproj" />
+  <Project Path="src/Smudge/Smudge.csproj" />
+  <Project Path="tests/Smudge.SourceGenerator.Tests/Smudge.SourceGenerator.Tests.csproj" />
+</Solution>

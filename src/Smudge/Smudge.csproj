@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <PackageId>Smudge</PackageId>
+        <Description>Dirty tracking for C# classes via source generation.</Description>
+
+        <!-- Fails the pack if the package breaks public API compatibility.
+         Uncomment the baseline once your first stable version is on NuGet.org,
+         and bump it each time you ship a new stable release. -->
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <!-- <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion> -->
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Normal reference for compiling Smudge itself, but PrivateAssets="all"
+             stops NuGet from emitting a dependency on a nonexistent
+             "Smudge.Attributes" package. -->
+        <ProjectReference Include="..\Smudge.Attributes\Smudge.Attributes.csproj"
+                          PrivateAssets="all" />
+
+        <!-- Build-order dependency only; the generator is never a runtime reference. -->
+        <ProjectReference Include="..\Smudge.SourceGenerator\Smudge.SourceGenerator.csproj"
+                          ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSE" Pack="true" PackagePath="/" />
+        <None Include="..\..\README.md" Pack="true" PackagePath="/" />
+
+        <!-- Physically pack the attributes dll into lib/ so consumers get a
+             compile reference to it. -->
+        <None Include="..\Smudge.Attributes\bin\$(Configuration)\netstandard2.0\Smudge.Attributes.dll"
+              Pack="true" PackagePath="lib/netstandard2.0" Visible="false" />
+
+        <!-- And the generator into the analyzer path so Roslyn loads it. -->
+        <None Include="..\Smudge.SourceGenerator\bin\$(Configuration)\netstandard2.0\Smudge.SourceGenerator.dll"
+              Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+
+</Project>
