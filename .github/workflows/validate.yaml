@@ -35,7 +35,7 @@ jobs:
         run: dotnet build --no-restore -c Release -p:Version=0.0.0-ci.${{ github.run_number }}
         
       - name: Test
-        run: dotnet test --no-build -c Release --verbosity normal
+        run: dotnet test --no-build -c Release --report-github
         
       - name: Pack (validation only)
         run: |

@@ -1,11 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
-
     <ItemGroup>
         <ProjectReference Include="..\..\src\Smudge.SourceGenerator\Smudge.SourceGenerator.csproj" />
         <!-- so test compilations can reference the real attribute/interface assemblies -->
@@ -18,11 +12,6 @@
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
         <PackageReference Include="Verify.SourceGenerators" Version="2.5.0" />
         <PackageReference Include="Verify.XunitV3" Version="31.25.0" />
-        <PackageReference Include="xunit.v3.mtp-v2" Version="3.2.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Using Include="Xunit"/>
     </ItemGroup>
 
 </Project>
