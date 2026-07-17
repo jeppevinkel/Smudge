@@ -3,6 +3,7 @@
   <component name="UserContentModel">
     <attachedFolders>
       <Path>.github</Path>
+      <Path>tests/PackageSmokeTest</Path>
     </attachedFolders>
     <explicitIncludes />
     <explicitExcludes />
