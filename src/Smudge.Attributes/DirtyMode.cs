@@ -5,12 +5,9 @@ namespace Smudge;
 /// </summary>
 public enum DirtyMode
 {
-    /// <summary>
-    /// Each property is dirty if it has been modified
-    /// </summary>
-    PerProperty,
-    /// <summary>
-    /// Dirty is aggregated across all properties
-    /// </summary>
-    Aggregated
+    /// <summary>Dirty state is aggregated across all properties.</summary>
+    Aggregated = 0,
+
+    /// <summary>Each property tracks its own dirty state.</summary>
+    PerProperty = 1,
 }
