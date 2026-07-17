@@ -30,6 +30,16 @@ internal static class Diagnostics
         "Partial property '{0}' must declare both a getter and a setter to be dirty-tracked",
         "Usage", DiagnosticSeverity.Error, isEnabledByDefault: true);
     
+    internal static readonly DiagnosticDescriptor InvalidDirtyMode = new(
+        "SMDG006", "Invalid DirtyMode value",
+        "'{0}' is not a valid DirtyMode value",
+        "Usage", DiagnosticSeverity.Error, isEnabledByDefault: true);
+
+    internal static readonly DiagnosticDescriptor TooManyProperties = new(
+        "SMDG007", "Too many tracked properties",
+        "Class '{0}' has {1} tracked properties; PerProperty mode supports at most 64",
+        "Usage", DiagnosticSeverity.Error, isEnabledByDefault: true);
+    
     internal static DiagnosticInfo Diag(DiagnosticDescriptor descriptor, LocationInfo? location, params object?[] args) =>
         new(descriptor, location, new EquatableArray<string>(
             args.Select(a => a?.ToString() ?? "null").ToArray()));

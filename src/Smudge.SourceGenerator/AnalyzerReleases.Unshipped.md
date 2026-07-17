@@ -7,3 +7,5 @@ SMDG002 | Usage    | Error    | SMDG002
 SMDG003 | Usage    | Error    | SMDG003
 SMDG004 | Usage    | Error    | SMDG004
 SMDG005 | Usage    | Error    | SMDG005
+SMDG006 | Usage    | Error    | SMDG005
+SMDG007 | Usage    | Error    | SMDG005
