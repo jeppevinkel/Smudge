@@ -13,6 +13,7 @@ namespace Smudge.SourceGenerator;
 internal static class Transformer
 {
     private const string SmudgeDefaultAttributeName = "Smudge.SmudgeDefaultAttribute";
+    private const string FallbackDefault = "default!";
     
     private static readonly SymbolDisplayFormat FullyQualifiedNullableFormat =
         SymbolDisplayFormat.FullyQualifiedFormat
@@ -110,7 +111,7 @@ internal static class Transformer
             .FirstOrDefault(a => a.AttributeClass?.ToDisplayString() == SmudgeDefaultAttributeName);
 
         if (attribute is not { ConstructorArguments.Length: 1 })
-            return "default";
+            return FallbackDefault;
 
         var arg = attribute.ConstructorArguments[0];
         var location = LocationInfo.From(
@@ -121,11 +122,11 @@ internal static class Transformer
         if (arg.IsNull)
         {
             if (AcceptsNull(property.Type))
-                return "default";
+                return FallbackDefault;
 
             diagnostics.Add(Diagnostics.Diag(Diagnostics.TypeMismatch, location,
                 "null", "null", property.Type.ToDisplayString(), property.Name));
-            return "default";
+            return FallbackDefault;
         }
 
         if (IsCollectionType(property.Type))
@@ -137,7 +138,7 @@ internal static class Transformer
                 // List<SomeCustomType> — anything attributes can't represent.
                 diagnostics.Add(Diagnostics.Diag(Diagnostics.UnsupportedDefaultType, location,
                     property.Name, property.Type.ToDisplayString()));
-                return "default";
+                return FallbackDefault;
             }
 
             var mismatched = false;
@@ -153,7 +154,7 @@ internal static class Transformer
             }
 
             return mismatched
-                ? "default"
+                ? FallbackDefault
                 : $"[{string.Join(", ", arg.Values.Select(FormatConstant))}]";
         }
         
@@ -163,7 +164,7 @@ internal static class Transformer
             {
                 diagnostics.Add(Diagnostics.Diag(Diagnostics.UnsupportedDefaultType, location,
                     property.Name, property.Type.ToDisplayString()));
-                return "default";
+                return FallbackDefault;
             }
             
             var value = arg.Values[0];
@@ -175,14 +176,14 @@ internal static class Transformer
                 value.Type?.ToDisplayString() ?? "null",
                 property.Type.ToDisplayString(),
                 property.Name));
-            return "default";
+            return FallbackDefault;
         }
 
         // Wrong count: report, but still emit a default-initialized property
         // so SMDG001 is the only error the user sees (no CS9248 cascade).
         diagnostics.Add(Diagnostics.Diag(Diagnostics.WrongArgumentCount,
             location, property.Name, arg.Values.Length));
-        return "default";
+        return FallbackDefault;
     }
     
     // ------------------------------------------------------------------
@@ -191,8 +192,8 @@ internal static class Transformer
     
     private static string FormatConstant(TypedConstant constant)
     {
-        if (constant.IsNull) return "default";
-        if (constant.Kind == TypedConstantKind.Array) return "default"; // nested arrays unsupported
+        if (constant.IsNull) return FallbackDefault;
+        if (constant.Kind == TypedConstantKind.Array) return FallbackDefault; // nested arrays unsupported
 
         if (constant.Kind == TypedConstantKind.Enum)
             return $"({constant.Type!.ToDisplayString(FullyQualifiedNullableFormat)})({Convert.ToString(constant.Value, CultureInfo.InvariantCulture)})";
