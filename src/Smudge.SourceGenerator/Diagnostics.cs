@@ -40,6 +40,12 @@ internal static class Diagnostics
         "Class '{0}' has {1} tracked properties; PerProperty mode supports at most 64",
         "Usage", DiagnosticSeverity.Error, isEnabledByDefault: true);
     
+    internal static readonly DiagnosticDescriptor UnsupportedDefaultType = new(
+        "SMDG008", "Unsupported [SmudgeDefault] property type",
+        "[SmudgeDefault] cannot express a default for property '{0}' of type '{1}'; " +
+        "set the default in a constructor and call WipeClean() instead",
+        "Usage", DiagnosticSeverity.Error, isEnabledByDefault: true);
+    
     internal static DiagnosticInfo Diag(DiagnosticDescriptor descriptor, LocationInfo? location, params object?[] args) =>
         new(descriptor, location, new EquatableArray<string>(
             args.Select(a => a?.ToString() ?? "null").ToArray()));

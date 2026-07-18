@@ -131,8 +131,14 @@ internal static class Transformer
         if (IsCollectionType(property.Type))
         {
             var elementType = GetCollectionElementType(property.Type);
-            if (elementType is null)
+            if (elementType is null || !IsAttributeExpressible(elementType))
+            {
+                // Dictionary<K,V> lands here (KeyValuePair element), as does
+                // List<SomeCustomType> — anything attributes can't represent.
+                diagnostics.Add(Diagnostics.Diag(Diagnostics.UnsupportedDefaultType, location,
+                    property.Name, property.Type.ToDisplayString()));
                 return "default";
+            }
 
             var mismatched = false;
             foreach (var value in arg.Values)
@@ -153,6 +159,13 @@ internal static class Transformer
         
         if (arg.Values.Length == 1)
         {
+            if (!IsAttributeExpressible(property.Type))
+            {
+                diagnostics.Add(Diagnostics.Diag(Diagnostics.UnsupportedDefaultType, location,
+                    property.Name, property.Type.ToDisplayString()));
+                return "default";
+            }
+            
             var value = arg.Values[0];
             if (TypeMatches(property.Type, value))
                 return FormatConstant(value);
@@ -276,5 +289,31 @@ internal static class Transformer
         return type.AllInterfaces
             .FirstOrDefault(i => i.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T)
             ?.TypeArguments[0];
+    }
+    
+    /// <summary>
+    /// Whether a value of this type can be expressed as an attribute constant
+    /// (and therefore supplied via [SmudgeDefault]).
+    /// </summary>
+    private static bool IsAttributeExpressible(ITypeSymbol type)
+    {
+        // int? is expressible via its underlying type
+        if (type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T } nullable)
+            return IsAttributeExpressible(nullable.TypeArguments[0]);
+
+        if (type.TypeKind == TypeKind.Enum)
+            return true;
+
+        return type.SpecialType is
+            SpecialType.System_Boolean or
+            SpecialType.System_Byte or SpecialType.System_SByte or
+            SpecialType.System_Int16 or SpecialType.System_UInt16 or
+            SpecialType.System_Int32 or SpecialType.System_UInt32 or
+            SpecialType.System_Int64 or SpecialType.System_UInt64 or
+            SpecialType.System_Char or
+            SpecialType.System_Single or SpecialType.System_Double or
+            SpecialType.System_Decimal or   // reachable via int widening
+            SpecialType.System_String or
+            SpecialType.System_Object;
     }
 }
