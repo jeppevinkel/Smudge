@@ -3,8 +3,10 @@ using System;
 namespace Smudge;
 
 /// <summary>
-/// Mark a class as smudgeable.
-/// Smudgeable classes have all partial properties tracked for changes.
+/// Marks a class as smudgeable. The Smudge source generator will implement
+/// <see cref="ISmudgeable"/> (or <see cref="IPerPropertySmudgeable"/> when using
+/// <see cref="DirtyMode.PerProperty"/>) and track all <see langword="partial"/> properties for changes.
+/// The class must be declared <see langword="partial"/>.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, Inherited = false)]
 public sealed class SmudgeableAttribute(DirtyMode dirtyMode = DirtyMode.Aggregated) : Attribute
