@@ -114,6 +114,7 @@ Console.WriteLine(settings.IsDirty); // False
 
 - The class must be declared `partial`.
 - Tracked properties must be `partial` and have both a getter and a setter.
+- non-nullable reference properties without `[SmudgeDefault]` start as null. Supply a default via the attribute, or assign in a constructor and call `WipeClean()`.
 - Static properties and indexers are not tracked.
 - Generic classes and nested classes are not supported.
 
