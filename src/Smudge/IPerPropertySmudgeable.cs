@@ -10,10 +10,11 @@ namespace Smudge;
 public interface IPerPropertySmudgeable : ISmudgeable
 {
     /// <summary>
-    /// Returns true if the property value has been modified since the last time it was wiped clean.
+    /// Returns true if the property value has been modified since the last <see cref="ISmudgeable.WipeClean"/>.
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException">Throws if the property name doesn't match any defined property.</exception>
+    /// <param name="propertyName">The name of the property to check.</param>
+    /// <returns><see langword="true"/> if the property has changed; otherwise <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="propertyName"/> does not match any tracked property.</exception>
     bool IsPropertyDirty(string propertyName);
     
     /// <summary>

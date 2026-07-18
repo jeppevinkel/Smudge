@@ -1,7 +1,7 @@
 namespace Smudge;
 
 /// <summary>
-/// Determines if dirty is per property or aggregated
+/// Specifies how dirty state is tracked in a smudgeable class.
 /// </summary>
 public enum DirtyMode
 {
