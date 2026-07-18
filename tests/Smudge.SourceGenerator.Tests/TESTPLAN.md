@@ -9,10 +9,10 @@ generated trees use the driver's options).
 Assert `output.GetDiagnostics()` has no errors after running the generator.
 
 ### Happy paths
-- [ ] Aggregated mode: class with a few partial properties, no `[SmudgeDefault]`
-- [ ] PerProperty mode: same shape
-- [ ] Bare `[Smudgeable]` (constructor default → Aggregated)
-- [ ] Class in a namespace / class in the global namespace
+- [x] Aggregated mode: class with a few partial properties, no `[SmudgeDefault]`
+- [x] PerProperty mode: same shape
+- [x] Bare `[Smudgeable]` (constructor default → Aggregated)
+- [x] Class in a namespace / class in the global namespace
 - [ ] `internal` class (generated part must not conflict → no accessibility modifier emitted)
 - [ ] Property accessibility mirrored (`internal partial int X { get; set; }`)
 - [ ] Two smudgeable classes with the same name in different namespaces (hint-name collision)
