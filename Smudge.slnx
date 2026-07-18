@@ -6,6 +6,7 @@
   <Folder Name="/SolutionFolder/Tests/">
     <File Path="tests\Directory.Build.props" />
   </Folder>
+  <Project Path="Example/Smudge.Example/Smudge.Example.csproj" />
   <Project Path="src/Smudge.Attributes/Smudge.Attributes.csproj" />
   <Project Path="src/Smudge.SourceGenerator/Smudge.SourceGenerator.csproj" />
   <Project Path="src/Smudge/Smudge.csproj" />

@@ -40,7 +40,9 @@ internal static class TestHelper
     public static void AssertNoCompilationErrors(Compilation output)
     {
         var errors = output.GetDiagnostics()
-            .Where(d => d.Severity == DiagnosticSeverity.Error)
+            .Where(d => d.Severity == DiagnosticSeverity.Error
+                        || (d.Severity == DiagnosticSeverity.Warning
+                            && d.Location.SourceTree?.FilePath.EndsWith(".g.cs") == true))
             .ToList();
 
         if (errors.Count > 0)

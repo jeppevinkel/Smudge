@@ -114,17 +114,18 @@ Console.WriteLine(settings.IsDirty); // False
 
 - The class must be declared `partial`.
 - Tracked properties must be `partial` and have both a getter and a setter.
+- non-nullable reference properties without `[SmudgeDefault]` start as null. Supply a default via the attribute, or assign in a constructor and call `WipeClean()`.
 - Static properties and indexers are not tracked.
 - Generic classes and nested classes are not supported.
 
 ## Diagnostics
 
-| Code     | Meaning                                                     |
-|----------|-------------------------------------------------------------|
+| Code     | Meaning                                                       |
+|----------|---------------------------------------------------------------|
 | SMDG001  | `[SmudgeDefault]` argument count does not match property type |
-| SMDG002  | `[SmudgeDefault]` value type does not match property type    |
-| SMDG003  | Class must be `partial`                                     |
-| SMDG004  | Generic or nested classes are not supported                 |
-| SMDG005  | Property must have both a getter and a setter               |
-| SMDG006  | Invalid `DirtyMode` value                                   |
-| SMDG007  | Too many tracked properties (maximum 64 in PerProperty mode) |
+| SMDG002  | `[SmudgeDefault]` value type does not match property type     |
+| SMDG003  | Class must be `partial`                                       |
+| SMDG004  | Generic or nested classes are not supported                   |
+| SMDG005  | Property must have both a getter and a setter                 |
+| SMDG006  | Invalid `DirtyMode` value                                     |
+| SMDG007  | Too many tracked properties (maximum 64 in PerProperty mode)  |
