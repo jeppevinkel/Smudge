@@ -21,6 +21,9 @@ public class HappyPathTests
 
         Assert.Empty(result.Diagnostics);
         TestHelper.AssertNoCompilationErrors(output);
+        
+        var generated = Assert.Single(result.GeneratedSources).SourceText.ToString();
+        Assert.Contains("string? ", generated);
     }
     
     [Fact]

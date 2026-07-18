@@ -19,9 +19,9 @@ Assert `output.GetDiagnostics()` has no errors after running the generator.
 - [ ] Class with zero partial properties (empty but valid output)
 
 ### Property types
-- [ ] Primitives: int, bool, string
-- [ ] `string?` and other nullable reference types (emitted type must carry the `?`)
-- [ ] Nullable value types: `int?`
+- [x] Primitives: int, bool, string
+- [x] `string?` and other nullable reference types (emitted type must carry the `?`)
+- [x] Nullable value types: `int?`
 - [ ] Enums (user-defined, in another namespace, fully-qualified emission)
 - [ ] Types whose names collide with usings (property type `Task` etc., global:: qualification)
 
@@ -30,7 +30,7 @@ Assert `output.GetDiagnostics()` has no errors after running the generator.
 - [x] char (must emit quoted `'c'`)
 - [x] float / double (suffix: `1.5f`, `1.5d`; invariant culture, decimal separator!)
 - [x] double.NaN / infinities
-- [ ] long, uint, ulong (suffixes)
+- [x] long, uint, ulong (suffixes)
 - [ ] bool, enum value
 - [x] `[SmudgeDefault(null)]` on nullable property
 - [x] Numeric widening: `[SmudgeDefault(1)]` on long / double / decimal property
@@ -80,7 +80,7 @@ not for covering cases (that's category 1).
 
 ## Crash regressions (must never take down the compilation)
 
-- [ ] `[SmudgeDefault(null)]`, literal null binds to the params ARRAY itself;
+- [x] `[SmudgeDefault(null)]`, literal null binds to the params ARRAY itself;
       `TypedConstant.Values` on it throws without the IsNull guard
 - [ ] Nested array argument `[SmudgeDefault(new[] { 1 })]`, fallback, not exception
 - [ ] Attribute present but class declaration is syntactically broken (partial typing
