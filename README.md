@@ -120,12 +120,12 @@ Console.WriteLine(settings.IsDirty); // False
 
 ## Diagnostics
 
-| Code     | Meaning                                                     |
-|----------|-------------------------------------------------------------|
+| Code     | Meaning                                                       |
+|----------|---------------------------------------------------------------|
 | SMDG001  | `[SmudgeDefault]` argument count does not match property type |
-| SMDG002  | `[SmudgeDefault]` value type does not match property type    |
-| SMDG003  | Class must be `partial`                                     |
-| SMDG004  | Generic or nested classes are not supported                 |
-| SMDG005  | Property must have both a getter and a setter               |
-| SMDG006  | Invalid `DirtyMode` value                                   |
-| SMDG007  | Too many tracked properties (maximum 64 in PerProperty mode) |
+| SMDG002  | `[SmudgeDefault]` value type does not match property type     |
+| SMDG003  | Class must be `partial`                                       |
+| SMDG004  | Generic or nested classes are not supported                   |
+| SMDG005  | Property must have both a getter and a setter                 |
+| SMDG006  | Invalid `DirtyMode` value                                     |
+| SMDG007  | Too many tracked properties (maximum 64 in PerProperty mode)  |
