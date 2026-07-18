@@ -9,31 +9,31 @@ generated trees use the driver's options).
 Assert `output.GetDiagnostics()` has no errors after running the generator.
 
 ### Happy paths
-- [ ] Aggregated mode: class with a few partial properties, no `[SmudgeDefault]`
-- [ ] PerProperty mode: same shape
-- [ ] Bare `[Smudgeable]` (constructor default → Aggregated)
-- [ ] Class in a namespace / class in the global namespace
+- [x] Aggregated mode: class with a few partial properties, no `[SmudgeDefault]`
+- [x] PerProperty mode: same shape
+- [x] Bare `[Smudgeable]` (constructor default → Aggregated)
+- [x] Class in a namespace / class in the global namespace
 - [ ] `internal` class (generated part must not conflict → no accessibility modifier emitted)
 - [ ] Property accessibility mirrored (`internal partial int X { get; set; }`)
 - [ ] Two smudgeable classes with the same name in different namespaces (hint-name collision)
 - [ ] Class with zero partial properties (empty but valid output)
 
 ### Property types
-- [ ] Primitives: int, bool, string
-- [ ] `string?` and other nullable reference types (emitted type must carry the `?`)
-- [ ] Nullable value types: `int?`
+- [x] Primitives: int, bool, string
+- [x] `string?` and other nullable reference types (emitted type must carry the `?`)
+- [x] Nullable value types: `int?`
 - [ ] Enums (user-defined, in another namespace, fully-qualified emission)
 - [ ] Types whose names collide with usings (property type `Task` etc., global:: qualification)
 
 ### `[SmudgeDefault]` values, each must produce *compiling* initializers
-- [ ] string containing quotes, backslash, newline (escaping, `SymbolDisplay.FormatLiteral`)
-- [ ] char (must emit quoted `'c'`)
-- [ ] float / double (suffix: `1.5f`, `1.5d`; invariant culture, decimal separator!)
-- [ ] double.NaN / infinities
-- [ ] long, uint, ulong (suffixes)
+- [x] string containing quotes, backslash, newline (escaping, `SymbolDisplay.FormatLiteral`)
+- [x] char (must emit quoted `'c'`)
+- [x] float / double (suffix: `1.5f`, `1.5d`; invariant culture, decimal separator!)
+- [x] double.NaN / infinities
+- [x] long, uint, ulong (suffixes)
 - [ ] bool, enum value
-- [ ] `[SmudgeDefault(null)]` on nullable property
-- [ ] Numeric widening: `[SmudgeDefault(1)]` on long / double / decimal property
+- [x] `[SmudgeDefault(null)]` on nullable property
+- [x] Numeric widening: `[SmudgeDefault(1)]` on long / double / decimal property
 
 ### Collections
 - [ ] `List<string>` with `[SmudgeDefault("a", "b")]` → collection expression
@@ -80,7 +80,7 @@ not for covering cases (that's category 1).
 
 ## Crash regressions (must never take down the compilation)
 
-- [ ] `[SmudgeDefault(null)]`, literal null binds to the params ARRAY itself;
+- [x] `[SmudgeDefault(null)]`, literal null binds to the params ARRAY itself;
       `TypedConstant.Values` on it throws without the IsNull guard
 - [ ] Nested array argument `[SmudgeDefault(new[] { 1 })]`, fallback, not exception
 - [ ] Attribute present but class declaration is syntactically broken (partial typing
