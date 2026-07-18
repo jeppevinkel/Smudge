@@ -26,14 +26,14 @@ Assert `output.GetDiagnostics()` has no errors after running the generator.
 - [ ] Types whose names collide with usings (property type `Task` etc., global:: qualification)
 
 ### `[SmudgeDefault]` values, each must produce *compiling* initializers
-- [ ] string containing quotes, backslash, newline (escaping, `SymbolDisplay.FormatLiteral`)
-- [ ] char (must emit quoted `'c'`)
-- [ ] float / double (suffix: `1.5f`, `1.5d`; invariant culture, decimal separator!)
-- [ ] double.NaN / infinities
+- [x] string containing quotes, backslash, newline (escaping, `SymbolDisplay.FormatLiteral`)
+- [x] char (must emit quoted `'c'`)
+- [x] float / double (suffix: `1.5f`, `1.5d`; invariant culture, decimal separator!)
+- [x] double.NaN / infinities
 - [ ] long, uint, ulong (suffixes)
 - [ ] bool, enum value
-- [ ] `[SmudgeDefault(null)]` on nullable property
-- [ ] Numeric widening: `[SmudgeDefault(1)]` on long / double / decimal property
+- [x] `[SmudgeDefault(null)]` on nullable property
+- [x] Numeric widening: `[SmudgeDefault(1)]` on long / double / decimal property
 
 ### Collections
 - [ ] `List<string>` with `[SmudgeDefault("a", "b")]` → collection expression
